@@ -87,7 +87,15 @@ class DiscCard(Card):
         act(t("action.another_game"), "refresh-cw", lambda: self.win.another_game(self.entry))
         if self.entry.store != "steam":          # Steam games: change it in Steam / Grunge Editor instead
             act(t("action.cover"), "image", lambda: self.win.change_cover(self.entry))
+        act(t("action.reload_cover"), "refresh-cw", lambda: self.win.reload_cover(self.entry))
         act(t("action.save_iso"), "save", lambda: self.win.save_iso(tag))
+        on = history.on_profile(tag.store, tag.game_id)
+        if on is not None:                       # it reached a disc: it can be on the profile
+            a = QAction(icons.icon("eye" if on else "eye-off", C["text_2"], 14), t("action.on_profile"), m)
+            a.setCheckable(True)
+            a.setChecked(on)
+            a.toggled.connect(lambda v: self.win.set_on_profile(tag.store, tag.game_id, v))
+            m.addAction(a)
         m.addSeparator()
         if store_for(tag.store).web_page(tag.game_id):
             act(t("action.store_page"), "external-link",
@@ -202,6 +210,11 @@ class LibraryPage(QWidget):
             tl.addWidget(was)
         if g.shared:
             tl.addWidget(Pill(t("status.family"), "violet"))
+        on = history.on_profile(g.store, g.game_id)
+        if on is not None:
+            eye = IconButton("eye" if on else "eye-off", t("action.on_profile_tip_on" if on else "action.on_profile_tip_off"), 14,
+                             on_click=lambda _c=False, game=g, now=on: self.win.set_on_profile(game.store, game.game_id, not now))
+            tl.addWidget(eye)
         if g.burnable:
             fresh = g.status in ("none", "was")
             tl.addWidget(Button(t("library.make_disc") if fresh else t("library.another_copy"),
@@ -376,6 +389,12 @@ class MainWindow(QMainWindow):
         if dlg.changed:
             self.refresh()
 
+    def reload_cover(self, entry: ShelfEntry):
+        """Forget the cached cover and look for it again (you changed it in Steam, or it never loaded)."""
+        media.forget_cover(entry.store, entry.game_id)
+        self.refresh()
+        self.toasts.show(t("cover.reloaded"), "info")
+
     def another_game(self, entry: ShelfEntry):
         """Put another game on a disc you already have: point it elsewhere, or erase and burn."""
         from ui.new_disc import NewDiscDialog
@@ -475,7 +494,7 @@ class MainWindow(QMainWindow):
 
         def burn(iso: Path):
             self._busy = drive
-            note = None if host.WINDOWS else self.toasts.show(t("burn.burning", title=tag.title, drive=name), "info", 0)
+            note = self.toasts.show(t("burn.burning", title=tag.title, drive=name), "info", 0)
 
             def done(res):
                 self._busy = ""
@@ -492,7 +511,7 @@ class MainWindow(QMainWindow):
                 else:
                     self.toasts.show(t("burn.done", title=tag.title), "success", 9000)
                 self.sync_shelf()
-            run_async(self, lambda: media.burn(iso, drive), done)
+            run_async(self, lambda: media.burn(iso, drive, tag), done)
         self._with_iso(tag, burn, t("iso.preparing"))
 
     def save_iso(self, tag: DiscTag):
@@ -504,6 +523,13 @@ class MainWindow(QMainWindow):
         self._with_iso(tag, save, t("iso.preparing"))
 
     # ── pimpmysteam.com ───────────────────────────────────────────────────────
+    def set_on_profile(self, store: str, game_id: str, on: bool):
+        if history.set_on_profile(store, game_id, on):
+            self.toasts.show(t("shelf.profile_on") if on else t("shelf.profile_off"), "info")
+            if self._library_loaded:
+                self.library.render()
+            self.sync_shelf()
+
     def sync_shelf(self, force: bool = False):
         if not account.connected() or (not force and not sync.pending()):
             return
@@ -522,6 +548,11 @@ class MainWindow(QMainWindow):
             if res:
                 n = len(res.get("accepted") or [])
                 self.toasts.show(t("sync.done", n=n) if n else t("sync.none"), "success" if n else "info", 6000)
+                prof = res.get("profile") or {}
+                if prof.get("cap") and prof.get("visible", 0) > prof["cap"]:
+                    self.toasts.show(t("sync.profile_cap", n=prof["visible"], cap=prof["cap"]), "info", 9000)
+                elif prof.get("cap"):
+                    self.toasts.show(t("sync.profile_count", n=prof.get("shown", 0), cap=prof["cap"]), "info", 6000)
             if covers.get("cap"):
                 self.toasts.show(t("sync.cover_cap"), "info", 8000)
             elif covers.get("sent"):

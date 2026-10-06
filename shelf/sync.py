@@ -39,14 +39,16 @@ def pending() -> list[dict]:
 
 def sync(force: bool = False) -> dict:
     """Send what the server does not have yet (everything with force). Returns the server's answer
-    ({accepted, unverified, steam_linked}) or {} when there is nothing to send / no account."""
+    ({accepted, unverified, steam_linked, profile: {shown, visible, cap}}) or {} when there is
+    nothing to send / no account."""
     if not account.connected():
         return {}
     items = history.load() if force else pending()
     if not items:
         return {}
     body = {"items": [{"store": x["store"], "game_id": str(x["game_id"]), "title": x.get("title") or "Untitled",
-                       "first_disc": x.get("first_disc"), "shared": bool(x.get("shared"))} for x in items][:500],
+                       "first_disc": x.get("first_disc"), "shared": bool(x.get("shared")),
+                       "hidden": bool(x.get("hidden"))} for x in items][:500],
             "family": [m["id"] for m in family.members()][:10]}
     res = account.api("/shelf/sync", method="POST", body=body, timeout=60)
     done = {(a["store"], str(a["game_id"])) for a in (res.get("accepted") or []) + (res.get("unverified") or [])}

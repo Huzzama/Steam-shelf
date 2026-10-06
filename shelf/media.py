@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Optional
 
 import config
-from shelf.disc import DiscTag, build_iso
+from shelf.disc import DiscTag, build_iso, disc_files, volume_label
 from shelf.stores import Steam
 
 log = logging.getLogger("shelf.media")
@@ -35,6 +35,16 @@ def cover_path(store: str, game_id: str) -> Path:
     return config.COVERS_DIR / f"{store}_{game_id}.jpg"
 
 
+def forget_cover(store: str, game_id: str) -> None:
+    """Drop the cached cover (and its SteamGridDB credit) so the next fetch_cover looks again."""
+    try:
+        cover_path(store, game_id).unlink()
+    except OSError:
+        pass
+    from shelf import artwork
+    artwork.forget_credit(store, game_id)
+
+
 def own_cover(store: str, game_id: str) -> Optional[Path]:
     """The art you set yourself in Steam: Grunge Editor's cover for a Steam game, or the
     art of a third-party game you added to Steam (userdata/<you>/config/grid/<appid>p.png)."""
@@ -48,8 +58,9 @@ def own_cover(store: str, game_id: str) -> Optional[Path]:
 
 def fetch_cover(store: str, game_id: str) -> Optional[Path]:
     """Cached cover (JPEG, ≤ 900 px wide). Order: the art you set in Steam yourself (always
-    wins, and is picked up again when it changes) → for Steam games, Steam's own 600x900 then
-    the wide header → for third-party games, SteamGridDB by title when you gave the app a key.
+    wins, and is picked up again when it changes) → for Steam games, the portrait in Steam's
+    appcache/librarycache, then Steam's 600x900 from the CDN, then the wide header → for
+    third-party games, SteamGridDB by title when you gave the app a key.
     None when there is nothing (the UI shows the title instead)."""
     p = cover_path(store, game_id)
     own = own_cover(store, game_id)
@@ -66,6 +77,9 @@ def fetch_cover(store: str, game_id: str) -> Optional[Path]:
     if p.is_file() and p.stat().st_size > 0:
         return p
     if store == "steam":
+        cached = Steam().cached_cover(game_id)          # Steam's own cache (or art you dropped there)
+        if cached and _save_image(cached, p):
+            return p
         urls = Steam.cover_urls(game_id)
         for u in urls:                                  # 600x900 (2x, 1x), then the wide header
             if _save_jpeg(u, p):
@@ -129,6 +143,12 @@ def disc_assets(cover: Optional[Path]) -> tuple[Optional[bytes], Optional[bytes]
     return jpg.getvalue(), ico.getvalue()
 
 
+def disc_payload(tag: DiscTag) -> dict[str, bytes]:
+    """The files that go on this disc (shelf.disc.disc_files with the cover and icon)."""
+    jpg, ico = disc_assets(fetch_cover(tag.store, tag.game_id))
+    return disc_files(tag, jpg, ico)
+
+
 def make_iso(tag: DiscTag) -> Path:
     cover = fetch_cover(tag.store, tag.game_id)
     jpg, ico = disc_assets(cover)
@@ -154,16 +174,17 @@ class EraseError(RuntimeError):
 _LINUX_DRIVE = re.compile(r"^/dev/sr[0-9]{1,3}$")
 
 
-def burn(iso: Path, drive: str) -> str:
-    """Windows: hands the image to Windows Disc Image Burner with the drive already picked and
-    returns "opened" (it finishes on its own). Linux: burns with xorriso, waits, returns "burned".
-    Raises BurnError."""
+def burn(iso: Path, drive: str, tag: Optional[DiscTag] = None) -> str:
+    """Burn the disc and wait for it (1-2 min); the disc is ejected at the end. Returns "burned".
+    Windows: IMAPI2 writes the files straight to the disc (what Explorer's "Burn to disc" does;
+    no image file for Windows to validate), so `tag` is needed there. Linux: xorriso burns the
+    image. Raises BurnError."""
     if sys.platform == "win32":
-        exe = Path(os.environ.get("SystemRoot", r"C:\Windows")) / "System32" / "isoburn.exe"
-        if not exe.is_file():
-            raise BurnError("no_isoburn")
-        subprocess.Popen([str(exe), "/Q", drive, str(iso)])
-        return "opened"
+        if tag is None:
+            raise BurnError("failed", "no disc tag")
+        from shelf import imapi
+        imapi.burn(disc_payload(tag), volume_label(tag.title), drive)
+        return "burned"
     _burn_linux(iso, drive)
     return "burned"
 
@@ -296,7 +317,7 @@ def _burn_linux(iso: Path, drive: str) -> None:
         raise BurnError("not_blank", state["profile"])
     # cdrecord emulation: one closed session, readable in every drive; overwriteable
     # media (DVD+RW, BD-RE) are simply written again from the start
-    rc, out = _run([exe, "-as", "cdrecord", "-v", f"dev={drive}", str(iso)], 1800)
+    rc, out = _run([exe, "-as", "cdrecord", "-v", "-eject", f"dev={drive}", str(iso)], 1800)
     if rc != 0:
         problem = _last_problem(out)
         low = out.lower()

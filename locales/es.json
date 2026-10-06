@@ -203,5 +203,18 @@
  "burn.err_no_access": "Tu usuario no tiene permiso para escribir en la unidad. Agrégate a su grupo (sudo usermod -aG cdrom $USER; en Arch 'optical'), cierra sesión, vuelve a entrar e inténtalo de nuevo.",
  "burn.err_no_disc": "Primero pon un CD o DVD virgen en la unidad.",
  "burn.err_not_blank": "Ese disco no es virgen. Pon un CD-R o DVD-R virgen, o un disco regrabable que hayas borrado.",
- "burn.err_failed": "Falló la grabación: {detail}"
+ "burn.err_failed": "Falló la grabación: {detail}",
+ "settings.launch_mode": "Steam abre el juego en",
+ "settings.launch_desktop": "Escritorio de Steam",
+ "settings.launch_bigpicture": "Modo Big Picture",
+ "settings.launch_help": "Big Picture: el juego, o su página de la tienda, se abre en el modo de pantalla completa de Steam para TV. Si Steam está cerrado, se inicia primero, lo que tarda un poco más.",
+ "action.on_profile": "Mostrar en mi perfil",
+ "action.on_profile_tip_on": "En tu perfil de pimpmysteam.com. Haz clic para quitarlo.",
+ "action.on_profile_tip_off": "No está en tu perfil de pimpmysteam.com. Haz clic para mostrarlo.",
+ "shelf.profile_on": "Se mostrará en tu perfil después de la próxima sincronización.",
+ "shelf.profile_off": "Quitado de tu perfil (sigue en tu historial).",
+ "sync.profile_count": "{n} de los {cap} juegos que una cuenta gratuita muestra en su perfil.",
+ "sync.profile_cap": "Elegiste {n} juegos para tu perfil, pero una cuenta gratuita muestra {cap}: los primeros {cap} que pusiste en un disco. Oculta algunos o apoya el proyecto en Ko-fi (pimpmysteam.com/donate) para mostrarlos todos.",
+ "action.reload_cover": "Recargar la portada",
+ "cover.reloaded": "Buscando la portada de nuevo…"
 }

@@ -203,5 +203,18 @@
  "burn.err_no_access": "Din användare får inte skriva till enheten. Lägg till dig själv i dess grupp (sudo usermod -aG cdrom $USER; i Arch 'optical'), logga ut och in igen och försök på nytt.",
  "burn.err_no_disc": "Sätt först in en tom CD- eller DVD-skiva i enheten.",
  "burn.err_not_blank": "Den här skivan är inte tom. Sätt in en tom CD-R eller DVD-R, eller en omskrivbar skiva som du har raderat.",
- "burn.err_failed": "Bränningen misslyckades: {detail}"
+ "burn.err_failed": "Bränningen misslyckades: {detail}",
+ "settings.launch_mode": "Steam öppnar spelet i",
+ "settings.launch_desktop": "Steam-skrivbord",
+ "settings.launch_bigpicture": "Big Picture-läge",
+ "settings.launch_help": "Big Picture: spelet, eller dess butikssida, öppnas i Steams helskärmsläge för TV. Om Steam är stängt startar det först, vilket tar lite längre tid.",
+ "action.on_profile": "Visa på min profil",
+ "action.on_profile_tip_on": "På din profil på pimpmysteam.com. Klicka för att ta bort det.",
+ "action.on_profile_tip_off": "Inte på din profil på pimpmysteam.com. Klicka för att visa det.",
+ "shelf.profile_on": "Det visas på din profil efter nästa synkning.",
+ "shelf.profile_off": "Borttaget från din profil (det finns kvar i din historik).",
+ "sync.profile_count": "{n} av de {cap} spel som ett gratiskonto visar på sin profil.",
+ "sync.profile_cap": "Du valde {n} spel till din profil, men ett gratiskonto visar {cap}: de första {cap} du lagt på en skiva. Dölj några, eller stötta på Ko-fi (pimpmysteam.com/donate) för att visa alla.",
+ "action.reload_cover": "Ladda om omslaget",
+ "cover.reloaded": "Letar efter omslaget igen…"
 }

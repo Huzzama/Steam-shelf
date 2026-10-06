@@ -203,5 +203,18 @@
  "burn.err_no_access": "Pengguna kamu tidak boleh menulis ke drive. Tambahkan dirimu ke grupnya (sudo usermod -aG cdrom $USER; di Arch 'optical'), keluar dari akun dan masuk lagi, lalu coba lagi.",
  "burn.err_no_disc": "Masukkan dulu CD atau DVD kosong ke drive.",
  "burn.err_not_blank": "Disc itu tidak kosong. Masukkan CD-R atau DVD-R kosong, atau disc yang bisa ditulis ulang dan sudah kamu hapus.",
- "burn.err_failed": "Pembakaran gagal: {detail}"
+ "burn.err_failed": "Pembakaran gagal: {detail}",
+ "settings.launch_mode": "Steam membuka game di",
+ "settings.launch_desktop": "Desktop Steam",
+ "settings.launch_bigpicture": "Mode Big Picture",
+ "settings.launch_help": "Big Picture: game atau halaman tokonya dibuka di mode layar penuh Steam untuk TV. Jika Steam sedang tertutup, Steam dijalankan dulu, jadi butuh waktu sedikit lebih lama.",
+ "action.on_profile": "Tampilkan di profilku",
+ "action.on_profile_tip_on": "Ada di profil pimpmysteam.com kamu. Klik untuk menghapusnya.",
+ "action.on_profile_tip_off": "Tidak ada di profil pimpmysteam.com kamu. Klik untuk menampilkannya.",
+ "shelf.profile_on": "Akan tampil di profilmu setelah sinkronisasi berikutnya.",
+ "shelf.profile_off": "Dihapus dari profilmu (tetap ada di riwayat).",
+ "sync.profile_count": "{n} dari {cap} game yang ditampilkan akun gratis di profilnya.",
+ "sync.profile_cap": "Kamu memilih {n} game untuk profilmu, tapi akun gratis hanya menampilkan {cap}: {cap} game pertama yang kamu taruh di disc. Sembunyikan beberapa, atau dukung di Ko-fi (pimpmysteam.com/donate) untuk menampilkan semuanya.",
+ "action.reload_cover": "Muat ulang sampul",
+ "cover.reloaded": "Mencari sampul lagi…"
 }

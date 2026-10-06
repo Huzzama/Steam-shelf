@@ -203,5 +203,18 @@
  "burn.err_no_access": "Utilizatorul tău nu are voie să scrie pe unitate. Adaugă-te în grupul ei (sudo usermod -aG cdrom $USER; pe Arch 'optical'), deconectează-te și conectează-te din nou, apoi încearcă iar.",
  "burn.err_no_disc": "Introdu mai întâi un CD sau DVD gol în unitate.",
  "burn.err_not_blank": "Acest disc nu este gol. Introdu un CD-R sau DVD-R gol, ori un disc reinscriptibil pe care l-ai șters.",
- "burn.err_failed": "Arderea a eșuat: {detail}"
+ "burn.err_failed": "Arderea a eșuat: {detail}",
+ "settings.launch_mode": "Steam deschide jocul în",
+ "settings.launch_desktop": "Steam desktop",
+ "settings.launch_bigpicture": "Modul Big Picture",
+ "settings.launch_help": "Big Picture: jocul sau pagina lui din magazin se deschide în modul Steam pentru TV, pe tot ecranul. Dacă Steam este închis, pornește mai întâi, ceea ce durează puțin mai mult.",
+ "action.on_profile": "Arată pe profilul meu",
+ "action.on_profile_tip_on": "Pe profilul tău de pe pimpmysteam.com. Apasă ca să-l scoți.",
+ "action.on_profile_tip_off": "Nu este pe profilul tău de pe pimpmysteam.com. Apasă ca să-l arăți.",
+ "shelf.profile_on": "Va apărea pe profilul tău după următoarea sincronizare.",
+ "shelf.profile_off": "Scos de pe profilul tău (rămâne în istoric).",
+ "sync.profile_count": "{n} din cele {cap} jocuri pe care un cont gratuit le arată pe profil.",
+ "sync.profile_cap": "Ai ales {n} jocuri pentru profil, dar un cont gratuit arată {cap}: primele {cap} pe care le-ai pus pe un disc. Ascunde câteva sau susține-ne pe Ko-fi (pimpmysteam.com/donate) ca să le arăți pe toate.",
+ "action.reload_cover": "Reîncarcă coperta",
+ "cover.reloaded": "Se caută coperta din nou…"
 }

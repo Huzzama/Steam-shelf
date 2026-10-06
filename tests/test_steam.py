@@ -78,3 +78,42 @@ def test_plan(tmp_path, monkeypatch):
     assert (shop.kind, shop.uri) == ("store", "steam://store/1222140")
     inst = launch.plan(DiscTag("steam", "1222140", "Detroit"), {"not_installed": "install"})
     assert inst.kind == "install"
+
+
+def test_big_picture_mode_opens_it_before_the_game(monkeypatch, tmp_path):
+    from shelf import launch, settings
+    from shelf.disc import DiscTag
+    opened = []
+    monkeypatch.setattr(launch, "open_uri", lambda uri: opened.append(uri) or True)
+    st = fake_steam(tmp_path)
+    monkeypatch.setattr(launch, "store_for", lambda key: st)
+    monkeypatch.setattr(st, "client_running", lambda: True)
+    monkeypatch.setattr(launch, "BP_SETTLE", 0.0)
+    prefs = dict(settings.DEFAULTS, launch_mode="bigpicture")
+    launch.run(DiscTag("steam", "1259420", "Days Gone"), prefs)
+    assert opened == ["steam://open/bigpicture", "steam://rungameid/1259420"]
+    opened.clear()
+    launch.run(DiscTag("steam", "1259420", "Days Gone"), dict(settings.DEFAULTS))
+    assert opened == ["steam://rungameid/1259420"]
+    assert settings.load()["launch_mode"] == "desktop"
+
+
+def test_steam_client_detected_in_proc(tmp_path):
+    from shelf import stores
+    (tmp_path / "123").mkdir(); (tmp_path / "123" / "comm").write_text("bash\n")
+    assert not stores._linux_steam_running(tmp_path)
+    (tmp_path / "124").mkdir(); (tmp_path / "124" / "comm").write_text("steam\n")
+    assert stores._linux_steam_running(tmp_path)
+
+
+def test_cover_from_steam_library_cache(tmp_path):
+    from PIL import Image
+    st = fake_steam(tmp_path)
+    cache = st.root() / "appcache" / "librarycache"
+    (cache / "1259420").mkdir(parents=True)
+    Image.new("RGB", (920, 430)).save(cache / "1259420" / "aaaa.jpg")       # the wide header, by hash
+    Image.new("RGB", (600, 900)).save(cache / "1259420" / "bbbb.jpg")       # the portrait, by hash
+    assert st.cached_cover("1259420") == cache / "1259420" / "bbbb.jpg"
+    Image.new("RGB", (600, 900)).save(cache / "1593500_library_600x900.jpg")  # the old layout
+    assert st.cached_cover("1593500") == cache / "1593500_library_600x900.jpg"
+    assert st.cached_cover("620") is None

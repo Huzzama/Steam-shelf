@@ -203,5 +203,18 @@
  "burn.err_no_access": "आपके यूज़र अकाउंट को ड्राइव पर लिखने की अनुमति नहीं है। खुद को उसके ग्रुप में जोड़ें (sudo usermod -aG cdrom $USER; Arch पर 'optical'), लॉग आउट करके दोबारा लॉग इन करें, और फिर कोशिश करें।",
  "burn.err_no_disc": "पहले ड्राइव में कोई ख़ाली CD या DVD डालें।",
  "burn.err_not_blank": "यह डिस्क ख़ाली नहीं है। ख़ाली CD-R या DVD-R डालें, या कोई रीराइटेबल डिस्क जिसे आपने मिटाया हो।",
- "burn.err_failed": "बर्न नहीं हो पाया: {detail}"
+ "burn.err_failed": "बर्न नहीं हो पाया: {detail}",
+ "settings.launch_mode": "Steam गेम को यहाँ खोलता है",
+ "settings.launch_desktop": "Steam डेस्कटॉप",
+ "settings.launch_bigpicture": "Big Picture मोड",
+ "settings.launch_help": "Big Picture: गेम या उसका स्टोर पेज Steam के फ़ुल-स्क्रीन TV मोड में खुलता है। अगर Steam बंद है तो वह पहले शुरू होता है, जिसमें थोड़ा ज़्यादा समय लगता है।",
+ "action.on_profile": "मेरी प्रोफ़ाइल पर दिखाएँ",
+ "action.on_profile_tip_on": "आपकी pimpmysteam.com प्रोफ़ाइल पर है। हटाने के लिए क्लिक करें।",
+ "action.on_profile_tip_off": "आपकी pimpmysteam.com प्रोफ़ाइल पर नहीं है। दिखाने के लिए क्लिक करें।",
+ "shelf.profile_on": "अगले सिंक के बाद यह आपकी प्रोफ़ाइल पर दिखेगा।",
+ "shelf.profile_off": "आपकी प्रोफ़ाइल से हटा दिया गया (यह आपकी हिस्ट्री में रहेगा)।",
+ "sync.profile_count": "मुफ़्त अकाउंट अपनी प्रोफ़ाइल पर जितने {cap} गेम दिखाता है, उनमें से {n}।",
+ "sync.profile_cap": "आपने प्रोफ़ाइल के लिए {n} गेम चुने हैं, लेकिन मुफ़्त अकाउंट {cap} दिखाता है: वे पहले {cap} जो आपने डिस्क पर रखे। कुछ को छिपाएँ, या सभी दिखाने के लिए Ko-fi (pimpmysteam.com/donate) पर प्रोजेक्ट को सपोर्ट करें।",
+ "action.reload_cover": "कवर फिर से लोड करें",
+ "cover.reloaded": "कवर फिर से खोजा जा रहा है…"
 }

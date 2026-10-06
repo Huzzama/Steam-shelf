@@ -203,5 +203,18 @@
  "burn.err_no_access": "Kullanıcı hesabının sürücüye yazma izni yok. Kendini sürücünün grubuna ekle (sudo usermod -aG cdrom $USER; Arch'ta 'optical'), oturumu kapatıp yeniden oturum aç ve tekrar dene.",
  "burn.err_no_disc": "Önce sürücüye boş bir CD ya da DVD tak.",
  "burn.err_not_blank": "Bu disk boş değil. Boş bir CD-R ya da DVD-R tak veya sildiğin yeniden yazılabilir bir disk kullan.",
- "burn.err_failed": "Yazma başarısız oldu: {detail}"
+ "burn.err_failed": "Yazma başarısız oldu: {detail}",
+ "settings.launch_mode": "Steam oyunu şurada açar",
+ "settings.launch_desktop": "Steam masaüstü",
+ "settings.launch_bigpicture": "Big Picture modu",
+ "settings.launch_help": "Big Picture: Oyun ya da mağaza sayfası, Steam'in tam ekran TV modunda açılır. Steam kapalıysa önce o başlar, bu biraz daha uzun sürer.",
+ "action.on_profile": "Profilimde göster",
+ "action.on_profile_tip_on": "pimpmysteam.com profilinde görünüyor. Kaldırmak için tıkla.",
+ "action.on_profile_tip_off": "pimpmysteam.com profilinde görünmüyor. Göstermek için tıkla.",
+ "shelf.profile_on": "Bir sonraki eşitlemeden sonra profilinde görünecek.",
+ "shelf.profile_off": "Profilinden kaldırıldı (geçmişinde durmaya devam eder).",
+ "sync.profile_count": "Ücretsiz bir hesabın profilinde gösterdiği {cap} oyunun {n} tanesi.",
+ "sync.profile_cap": "Profilin için {n} oyun seçtin ama ücretsiz bir hesap {cap} oyun gösterir: bir diske koyduğun ilk {cap} oyun. Birkaçını gizle ya da hepsini göstermek için Ko-fi'de (pimpmysteam.com/donate) projeyi destekle.",
+ "action.reload_cover": "Kapağı yeniden yükle",
+ "cover.reloaded": "Kapak yeniden aranıyor…"
 }

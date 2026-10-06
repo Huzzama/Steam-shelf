@@ -203,5 +203,18 @@
  "burn.err_no_access": "Tvůj uživatel nemá právo zapisovat na mechaniku. Přidej se do její skupiny (sudo usermod -aG cdrom $USER; v Arch 'optical'), odhlas se, přihlas se zpět a zkus to znovu.",
  "burn.err_no_disc": "Nejdřív vlož do mechaniky prázdné CD nebo DVD.",
  "burn.err_not_blank": "Tento disk není prázdný. Vlož prázdné CD-R nebo DVD-R, případně přepisovatelný disk, který byl smazán.",
- "burn.err_failed": "Vypalování selhalo: {detail}"
+ "burn.err_failed": "Vypalování selhalo: {detail}",
+ "settings.launch_mode": "Steam otevírá hru v",
+ "settings.launch_desktop": "Steam na ploše",
+ "settings.launch_bigpicture": "Režim Big Picture",
+ "settings.launch_help": "Big Picture: hra nebo její stránka v obchodě se otevře v celoobrazovkovém režimu Steamu pro televizi. Pokud je Steam zavřený, nejdřív se spustí, což trvá o něco déle.",
+ "action.on_profile": "Zobrazit na mém profilu",
+ "action.on_profile_tip_on": "Na tvém profilu na pimpmysteam.com. Kliknutím ji odebereš.",
+ "action.on_profile_tip_off": "Není na tvém profilu na pimpmysteam.com. Kliknutím ji zobrazíš.",
+ "shelf.profile_on": "Na tvém profilu se objeví po další synchronizaci.",
+ "shelf.profile_off": "Odebráno z tvého profilu (zůstává v historii).",
+ "sync.profile_count": "{n} z {cap} her, které bezplatný účet zobrazuje na profilu.",
+ "sync.profile_cap": "Vybral(a) sis {n} her na profil, ale bezplatný účet jich zobrazuje {cap}: prvních {cap}, které jsi dal(a) na disk. Některé skryj, nebo nás podpoř na Ko-fi (pimpmysteam.com/donate) a zobraz je všechny.",
+ "action.reload_cover": "Znovu načíst obal",
+ "cover.reloaded": "Obal se znovu hledá…"
 }

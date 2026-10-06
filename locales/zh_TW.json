@@ -203,5 +203,18 @@
  "burn.err_no_access": "你的使用者沒有寫入光碟機的權限。請將你自己加入它的群組(sudo usermod -aG cdrom $USER;在 Arch 上為 'optical'),登出並重新登入後再試一次。",
  "burn.err_no_disc": "請先在光碟機中放入空白的 CD 或 DVD。",
  "burn.err_not_blank": "這張光碟不是空白的。請放入空白的 CD-R 或 DVD-R,或是你已清除的可重複寫入光碟。",
- "burn.err_failed": "燒錄失敗:{detail}"
+ "burn.err_failed": "燒錄失敗:{detail}",
+ "settings.launch_mode": "Steam 開啟遊戲的方式",
+ "settings.launch_desktop": "Steam 桌面",
+ "settings.launch_bigpicture": "Big Picture 模式",
+ "settings.launch_help": "Big Picture:遊戲或其商店頁面會在 Steam 的全螢幕電視模式中開啟。如果 Steam 未執行,會先啟動它,耗時稍長。",
+ "action.on_profile": "顯示在我的個人檔案",
+ "action.on_profile_tip_on": "已顯示在你的 pimpmysteam.com 個人檔案中。點擊即可移除。",
+ "action.on_profile_tip_off": "未顯示在你的 pimpmysteam.com 個人檔案中。點擊即可顯示。",
+ "shelf.profile_on": "下次同步後,它會顯示在你的個人檔案中。",
+ "shelf.profile_off": "已從你的個人檔案中移除(仍保留在你的歷史記錄中)。",
+ "sync.profile_count": "免費帳號可在個人檔案中顯示 {cap} 款遊戲,你已選 {n} 款。",
+ "sync.profile_cap": "你為個人檔案選了 {n} 款遊戲,但免費帳號只顯示 {cap} 款:也就是你最先放進光碟的 {cap} 款。可以隱藏一些,或在 Ko-fi(pimpmysteam.com/donate)上支持本專案,以顯示全部。",
+ "action.reload_cover": "重新載入封面",
+ "cover.reloaded": "正在重新尋找封面…"
 }

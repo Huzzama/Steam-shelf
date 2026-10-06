@@ -203,5 +203,18 @@
  "burn.err_no_access": "Il tuo utente non ha il permesso di scrivere sull'unità. Aggiungiti al suo gruppo (sudo usermod -aG cdrom $USER; su Arch 'optical'), esci dalla sessione, accedi di nuovo e riprova.",
  "burn.err_no_disc": "Prima inserisci un CD o DVD vuoto nell'unità.",
  "burn.err_not_blank": "Quel disco non è vuoto. Inserisci un CD-R o DVD-R vuoto, oppure un disco riscrivibile che hai cancellato.",
- "burn.err_failed": "Masterizzazione non riuscita: {detail}"
+ "burn.err_failed": "Masterizzazione non riuscita: {detail}",
+ "settings.launch_mode": "Steam apre il gioco in",
+ "settings.launch_desktop": "Desktop di Steam",
+ "settings.launch_bigpicture": "Modalità Big Picture",
+ "settings.launch_help": "Big Picture: il gioco, o la sua pagina dello store, si apre nella modalità a schermo intero di Steam per TV. Se Steam è chiuso, si avvia prima, e ci vuole un po' più di tempo.",
+ "action.on_profile": "Mostra sul mio profilo",
+ "action.on_profile_tip_on": "Sul tuo profilo pimpmysteam.com. Clicca per toglierlo.",
+ "action.on_profile_tip_off": "Non è sul tuo profilo pimpmysteam.com. Clicca per mostrarlo.",
+ "shelf.profile_on": "Comparirà sul tuo profilo dopo la prossima sincronizzazione.",
+ "shelf.profile_off": "Tolto dal tuo profilo (resta nella tua cronologia).",
+ "sync.profile_count": "{n} dei {cap} giochi che un account gratuito mostra sul profilo.",
+ "sync.profile_cap": "Hai scelto {n} giochi per il tuo profilo, ma un account gratuito ne mostra {cap}: i primi {cap} che hai messo su un disco. Nascondine alcuni, oppure supporta il progetto su Ko-fi (pimpmysteam.com/donate) per mostrarli tutti.",
+ "action.reload_cover": "Ricarica la copertina",
+ "cover.reloaded": "Nuova ricerca della copertina…"
 }

@@ -203,5 +203,18 @@
  "burn.err_no_access": "Your user isn't allowed to write to the drive. Add yourself to its group (sudo usermod -aG cdrom $USER; on Arch 'optical'), log out and back in, and try again.",
  "burn.err_no_disc": "Put a blank CD or DVD in the drive first.",
  "burn.err_not_blank": "That disc isn't blank. Put in a blank CD-R or DVD-R, or a rewritable disc you erased.",
- "burn.err_failed": "Burning failed: {detail}"
+ "burn.err_failed": "Burning failed: {detail}",
+ "settings.launch_mode": "Steam opens the game in",
+ "settings.launch_desktop": "Steam desktop",
+ "settings.launch_bigpicture": "Big Picture mode",
+ "settings.launch_help": "Big Picture: the game, or its store page, opens in Steam's full-screen TV mode. If Steam is closed it starts first, which takes a little longer.",
+ "action.on_profile": "Show on my profile",
+ "action.on_profile_tip_on": "On your pimpmysteam.com profile. Click to take it off.",
+ "action.on_profile_tip_off": "Not on your pimpmysteam.com profile. Click to show it.",
+ "shelf.profile_on": "It will show on your profile after the next sync.",
+ "shelf.profile_off": "Taken off your profile (it stays in your history).",
+ "sync.profile_count": "{n} of the {cap} games a free account shows on its profile.",
+ "sync.profile_cap": "You picked {n} games for your profile, but a free account shows {cap}: the first {cap} you put on a disc. Hide some, or support on Ko-fi (pimpmysteam.com/donate) to show them all.",
+ "action.reload_cover": "Reload the cover",
+ "cover.reloaded": "Looking for the cover again…"
 }

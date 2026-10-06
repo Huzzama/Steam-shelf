@@ -45,6 +45,9 @@ A game only starts when a disc is *inserted* while the PC is already on.
 - The same goes for waking from sleep, when drives announce their discs again.
 - A countdown card ("Starting in 5 · Cancel") comes before every launch. Set it
   to 0 to start at once.
+- Settings › "Steam opens the game in": Steam desktop, or **Big Picture** for a
+  TV / couch setup. With Big Picture, the card first opens Big Picture (starting
+  Steam if it was closed), then the game or its store page opens inside it.
 
 Rules and tests: `shelf/policy.py`, `tests/test_policy.py`.
 
@@ -77,11 +80,14 @@ from the app's **Game mode** button); the log is also in `agent.log` (Files, bel
 
 ## Burning
 
-- **Windows**: **Burn to a disc** opens Windows Disc Image Burner with the image
-  and your drive already picked.
-- **Linux**: Steam Shelf burns it itself with **xorriso** (see Linux below) and
-  tells you when the disc is done. It checks the disc first: a blank CD-R, DVD-R,
-  DVD+R, or a DVD+RW / BD-RE (written again from the start).
+**Burn to a disc** burns it in the first drive and ejects the disc when done
+(a minute or two; the app says so):
+
+- **Windows**: through IMAPI2, what Explorer's "Burn to disc" uses. The files go
+  straight to the disc; no image is handed to Windows Disc Image Burner, which
+  refuses images made by other programs on some PCs ("isn't valid").
+- **Linux**: with **xorriso** (see Linux below). It checks the disc first: a
+  blank CD-R, DVD-R, DVD+R, or a DVD+RW / BD-RE (written again from the start).
 
 The image is about 2.4 MB (a hidden filler and some padding keep every drive
 happy), so any CD-R works. **Save the disc image** gives you the `.iso` for any
@@ -227,6 +233,12 @@ Every game that reaches a real disc is kept in `history.json` with the date of
 its first disc. Reusing or erasing that disc does not remove it. This is what
 the Steam Shelf section of your pimpmysteam.com profile shows.
 
+A free account shows **100 games** on its profile (supporters on Ko-fi: all of
+them), so you choose which: the disc's menu › **Show on my profile**, or the
+eye button on a Library row. A hidden game stays in your history; the next sync
+tells the server. If more than 100 are marked visible, the profile shows the
+first 100 you put on a disc and the app says so.
+
 ## Languages
 
 The same 26 languages as Steam Curator (Settings › Language, or the system
@@ -264,6 +276,34 @@ pip install -r requirements.txt pytest
 python -m pytest -q
 ```
 
+## Building the installer / AppImage
+
+```
+pip install -r requirements-build.txt
+python tools/build.py
+```
+
+Releases are built by GitHub Actions: `tools/release/release.yml` goes in
+`.github/workflows/`, and pushing a tag `v1.0.0` runs the tests, builds the
+Windows installer and the Linux AppImage, and publishes them on a GitHub
+release with the matching section of `CHANGELOG.md` as notes.
+
+- **Windows**: `dist\SteamShelf\` is the portable build (run `SteamShelf.exe`).
+  With [Inno Setup 6](https://jrsoftware.org/isinfo.php) installed
+  (`winget install JRSoftware.InnoSetup`) you also get
+  `dist\SteamShelf-<version>-setup.exe`: per-user install, no admin, stops the
+  running agent before updating, removes the autostart entry on uninstall.
+- **Linux**: `dist/SteamShelf/` plus `dist/SteamShelf-<version>-x86_64.AppImage`
+  (appimagetool is downloaded into `tools/` the first time). Build it on the
+  oldest distribution you want to support (Ubuntu 22.04 is a good base): the
+  AppImage carries Python and Qt but uses the system's glibc. Users still need
+  `xorriso` to burn. The app knows it runs from an AppImage and starts its
+  agent and card from the same file; the autostart entry points at it.
+
+The spec (`steamshelf.spec`) drops the Qt modules the app never loads
+(QtQuick, QtQml, QtPdf, QtNetwork…) and numpy, which Pillow pulls in:
+~160 MB on disk, ~60 MB as an AppImage.
+
 The UI kit (`ui/theme.py`, `ui/components.py`, `ui/icons.py`) is the same one
 Steam Curator uses. Fonts: Inter, Space Mono, Bebas Neue (OFL, `assets/fonts`).
 Icons: Lucide (ISC, `assets/LICENSE-lucide.txt`).
@@ -272,5 +312,3 @@ Icons: Lucide (ISC, `assets/LICENSE-lucide.txt`).
 
 1. Windows and Linux (this). macOS is not planned.
 2. Disc labels and case inserts printed from your Grunge Editor covers.
-3. Packaged builds: an installer for Windows, an AppImage for Linux (the app
-   already knows how to restart itself from an AppImage).

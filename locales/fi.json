@@ -203,5 +203,18 @@
  "burn.err_no_access": "Käyttäjälläsi ei ole oikeutta kirjoittaa asemaan. Lisää itsesi sen ryhmään (sudo usermod -aG cdrom $USER; Archissa 'optical'), kirjaudu ulos ja takaisin sisään ja yritä uudelleen.",
  "burn.err_no_disc": "Aseta ensin asemaan tyhjä CD- tai DVD-levy.",
  "burn.err_not_blank": "Levy ei ole tyhjä. Aseta asemaan tyhjä CD-R- tai DVD-R-levy tai uudelleenkirjoitettava levy, jonka olet tyhjentänyt.",
- "burn.err_failed": "Polttaminen epäonnistui: {detail}"
+ "burn.err_failed": "Polttaminen epäonnistui: {detail}",
+ "settings.launch_mode": "Steam avaa pelin",
+ "settings.launch_desktop": "Steamin työpöytä",
+ "settings.launch_bigpicture": "Big Picture -tila",
+ "settings.launch_help": "Big Picture: peli tai sen kauppasivu avautuu Steamin koko näytön TV-tilassa. Jos Steam on suljettu, se käynnistyy ensin, mikä kestää hieman kauemmin.",
+ "action.on_profile": "Näytä profiilissani",
+ "action.on_profile_tip_on": "Profiilissasi osoitteessa pimpmysteam.com. Napsauta poistaaksesi sen.",
+ "action.on_profile_tip_off": "Ei profiilissasi osoitteessa pimpmysteam.com. Napsauta näyttääksesi sen.",
+ "shelf.profile_on": "Se näkyy profiilissasi seuraavan synkronoinnin jälkeen.",
+ "shelf.profile_off": "Poistettu profiilistasi (se säilyy historiassasi).",
+ "sync.profile_count": "{n} / {cap} pelistä, jotka ilmaistili näyttää profiilissaan.",
+ "sync.profile_cap": "Valitsit profiiliisi {n} peliä, mutta ilmaistili näyttää {cap}: ensimmäiset {cap}, jotka olet laittanut levylle. Piilota joitain tai tue Ko-fissa (pimpmysteam.com/donate), niin näet ne kaikki.",
+ "action.reload_cover": "Lataa kansi uudelleen",
+ "cover.reloaded": "Etsitään kantta uudelleen…"
 }

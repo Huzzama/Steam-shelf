@@ -203,5 +203,18 @@
  "burn.err_no_access": "ผู้ใช้ของคุณไม่มีสิทธิ์เขียนลงไดรฟ์ ให้เพิ่มตัวคุณเองเข้ากลุ่มของไดรฟ์ (sudo usermod -aG cdrom $USER; บน Arch คือ 'optical') ออกจากระบบแล้วเข้าสู่ระบบใหม่ จากนั้นลองอีกครั้ง",
  "burn.err_no_disc": "ใส่แผ่น CD หรือ DVD เปล่าในไดรฟ์ก่อน",
  "burn.err_not_blank": "แผ่นนั้นไม่ใช่แผ่นเปล่า ให้ใส่ CD-R หรือ DVD-R เปล่า หรือแผ่นที่เขียนซ้ำได้ซึ่งลบแล้ว",
- "burn.err_failed": "เบิร์นไม่สำเร็จ: {detail}"
+ "burn.err_failed": "เบิร์นไม่สำเร็จ: {detail}",
+ "settings.launch_mode": "Steam เปิดเกมใน",
+ "settings.launch_desktop": "Steam เดสก์ท็อป",
+ "settings.launch_bigpicture": "โหมด Big Picture",
+ "settings.launch_help": "Big Picture: เกมหรือหน้าร้านของเกมจะเปิดในโหมดเต็มจอสำหรับทีวีของ Steam ถ้า Steam ปิดอยู่ ระบบจะเปิดให้ก่อน ซึ่งใช้เวลานานขึ้นเล็กน้อย",
+ "action.on_profile": "แสดงบนโปรไฟล์ของฉัน",
+ "action.on_profile_tip_on": "อยู่บนโปรไฟล์ pimpmysteam.com ของคุณ คลิกเพื่อนำออก",
+ "action.on_profile_tip_off": "ไม่อยู่บนโปรไฟล์ pimpmysteam.com ของคุณ คลิกเพื่อแสดง",
+ "shelf.profile_on": "จะแสดงบนโปรไฟล์ของคุณหลังการซิงก์ครั้งถัดไป",
+ "shelf.profile_off": "นำออกจากโปรไฟล์ของคุณแล้ว (ยังอยู่ในประวัติ)",
+ "sync.profile_count": "{n} จาก {cap} เกมที่บัญชีฟรีแสดงบนโปรไฟล์",
+ "sync.profile_cap": "คุณเลือกเกมสำหรับโปรไฟล์ {n} เกม แต่บัญชีฟรีแสดงได้ {cap} เกม คือ {cap} เกมแรกที่คุณใส่ลงแผ่น ซ่อนบางเกม หรือสนับสนุนบน Ko-fi (pimpmysteam.com/donate) เพื่อแสดงทั้งหมด",
+ "action.reload_cover": "โหลดปกใหม่",
+ "cover.reloaded": "กำลังค้นหาปกอีกครั้ง…"
 }

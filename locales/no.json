@@ -203,5 +203,18 @@
  "burn.err_no_access": "Brukeren din har ikke lov til å skrive til stasjonen. Legg deg selv til i stasjonens gruppe (sudo usermod -aG cdrom $USER; på Arch 'optical'), logg ut og inn igjen, og prøv på nytt.",
  "burn.err_no_disc": "Sett først en tom CD eller DVD inn i stasjonen.",
  "burn.err_not_blank": "Denne platen er ikke tom. Sett inn en tom CD-R eller DVD-R, eller en overskrivbar plate du har slettet.",
- "burn.err_failed": "Brenningen mislyktes: {detail}"
+ "burn.err_failed": "Brenningen mislyktes: {detail}",
+ "settings.launch_mode": "Steam åpner spillet i",
+ "settings.launch_desktop": "Steam-skrivebord",
+ "settings.launch_bigpicture": "Big Picture-modus",
+ "settings.launch_help": "Big Picture: spillet, eller butikksiden for det, åpnes i Steams fullskjermmodus for TV. Hvis Steam er lukket, starter det først, og det tar litt lengre tid.",
+ "action.on_profile": "Vis på profilen min",
+ "action.on_profile_tip_on": "På profilen din på pimpmysteam.com. Klikk for å fjerne det.",
+ "action.on_profile_tip_off": "Ikke på profilen din på pimpmysteam.com. Klikk for å vise det.",
+ "shelf.profile_on": "Det vises på profilen din etter neste synkronisering.",
+ "shelf.profile_off": "Fjernet fra profilen din (det blir værende i historikken).",
+ "sync.profile_count": "{n} av de {cap} spillene en gratiskonto viser på profilen sin.",
+ "sync.profile_cap": "Du valgte {n} spill til profilen din, men en gratiskonto viser {cap}: de første {cap} du har lagt på en plate. Skjul noen, eller støtt på Ko-fi (pimpmysteam.com/donate) for å vise alle.",
+ "action.reload_cover": "Last inn omslaget på nytt",
+ "cover.reloaded": "Leter etter omslaget på nytt…"
 }

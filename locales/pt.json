@@ -203,5 +203,18 @@
  "burn.err_no_access": "Seu usuário não tem permissão para gravar na unidade. Adicione seu usuário ao grupo dela (sudo usermod -aG cdrom $USER; no Arch 'optical'), saia da sessão, entre outra vez e tente de novo.",
  "burn.err_no_disc": "Coloque primeiro um CD ou DVD virgem na unidade.",
  "burn.err_not_blank": "Esse disco não é virgem. Coloque um CD-R ou DVD-R virgem, ou um disco regravável que você apagou.",
- "burn.err_failed": "Falha ao gravar: {detail}"
+ "burn.err_failed": "Falha ao gravar: {detail}",
+ "settings.launch_mode": "O Steam abre o jogo em",
+ "settings.launch_desktop": "Desktop do Steam",
+ "settings.launch_bigpicture": "Modo Big Picture",
+ "settings.launch_help": "Big Picture: o jogo, ou a página dele na loja, abre no modo de tela cheia do Steam para TV. Se o Steam estiver fechado, ele inicia primeiro, o que demora um pouco mais.",
+ "action.on_profile": "Mostrar no meu perfil",
+ "action.on_profile_tip_on": "No seu perfil em pimpmysteam.com. Clique para tirar.",
+ "action.on_profile_tip_off": "Fora do seu perfil em pimpmysteam.com. Clique para mostrar.",
+ "shelf.profile_on": "Ele vai aparecer no seu perfil após a próxima sincronização.",
+ "shelf.profile_off": "Removido do seu perfil (continua no seu histórico).",
+ "sync.profile_count": "{n} dos {cap} jogos que uma conta gratuita mostra no perfil.",
+ "sync.profile_cap": "Você escolheu {n} jogos para o seu perfil, mas uma conta gratuita mostra {cap}: os primeiros {cap} que você colocou em um disco. Oculte alguns ou apoie o projeto no Ko-fi (pimpmysteam.com/donate) para mostrar todos.",
+ "action.reload_cover": "Recarregar a capa",
+ "cover.reloaded": "Procurando a capa de novo…"
 }

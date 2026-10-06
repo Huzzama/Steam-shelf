@@ -1,0 +1,73 @@
+# Steam Shelf releases. Copy this file to .github/workflows/release.yml.
+#
+#   git tag v1.0.0 && git push origin v1.0.0     -> tests, then Windows installer + Linux AppImage
+#                                                   attached to a GitHub release with SHA256SUMS
+#   "Run workflow" in the Actions tab              -> builds without publishing (artifacts only)
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: sudo apt-get update && sudo apt-get install -y xorriso libegl1 libxkbcommon0 libxcb-cursor0
+      - run: pip install -r requirements.txt pytest
+      - run: QT_QPA_PLATFORM=offscreen python -m pytest -q
+
+  linux:
+    needs: tests
+    runs-on: ubuntu-22.04          # the AppImage uses the system glibc: build on the oldest base
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: sudo apt-get update && sudo apt-get install -y libegl1 libxkbcommon0 libxcb-cursor0 libfuse2
+      - run: pip install -r requirements.txt -r requirements-build.txt
+      - run: python tools/build.py
+      - run: QT_QPA_PLATFORM=offscreen ./dist/SteamShelf-*-x86_64.AppImage --appimage-extract-and-run --version
+      - uses: actions/upload-artifact@v4
+        with: { name: linux, path: dist/SteamShelf-*-x86_64.AppImage }
+
+  windows:
+    needs: tests
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt -r requirements-build.txt
+      - run: choco install innosetup --no-progress -y
+      - run: python tools/build.py
+      - run: dist\SteamShelf\SteamShelf.exe --version
+      - uses: actions/upload-artifact@v4
+        with: { name: windows, path: dist/SteamShelf-*-setup.exe }
+
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [linux, windows]
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { path: out, merge-multiple: true }
+      - run: cd out && sha256sum * > SHA256SUMS && cat SHA256SUMS
+      - name: Release notes from the CHANGELOG
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          awk -v v="$v" '/^## \[/{p = index($0, "[" v "]") > 0; next} p' CHANGELOG.md > notes.md
+          [ -s notes.md ] || echo "Steam Shelf $v" > notes.md
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: Steam Shelf ${{ github.ref_name }}
+          body_path: notes.md
+          files: out/*

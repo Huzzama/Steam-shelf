@@ -203,5 +203,18 @@
  "burn.err_no_access": "ユーザーにはドライブへの書き込み権限がありません。ドライブのグループに自分のユーザーを追加し (sudo usermod -aG cdrom $USER; Arch では 'optical')、ログアウトして再度ログインしてから、もう一度お試しください。",
  "burn.err_no_disc": "先に空の CD または DVD をドライブに入れてください。",
  "burn.err_not_blank": "このディスクは空ではありません。空の CD-R または DVD-R か、消去済みの書き換え可能なディスクを入れてください。",
- "burn.err_failed": "書き込みに失敗しました: {detail}"
+ "burn.err_failed": "書き込みに失敗しました: {detail}",
+ "settings.launch_mode": "Steam でゲームを開く場所",
+ "settings.launch_desktop": "Steam デスクトップ",
+ "settings.launch_bigpicture": "Big Picture モード",
+ "settings.launch_help": "Big Picture: ゲーム、またはそのストアページが Steam のフルスクリーン TV モードで開きます。Steam が閉じている場合は先に起動するため、少し時間がかかります。",
+ "action.on_profile": "プロフィールに表示",
+ "action.on_profile_tip_on": "pimpmysteam.com のあなたのプロフィールに表示中です。クリックで外します。",
+ "action.on_profile_tip_off": "pimpmysteam.com のあなたのプロフィールには表示されていません。クリックで表示します。",
+ "shelf.profile_on": "次回の同期後、プロフィールに表示されます。",
+ "shelf.profile_off": "プロフィールから外しました(履歴には残ります)。",
+ "sync.profile_count": "無料アカウントがプロフィールに表示できる {cap} 本のうち {n} 本です。",
+ "sync.profile_cap": "プロフィール用に {n} 本のゲームを選びましたが、無料アカウントで表示されるのは {cap} 本で、ディスクに入れた順の最初の {cap} 本です。一部を非表示にするか、Ko-fi(pimpmysteam.com/donate)でプロジェクトを支援すると、すべて表示できます。",
+ "action.reload_cover": "カバーを再読み込み",
+ "cover.reloaded": "カバーを再検索しています…"
 }

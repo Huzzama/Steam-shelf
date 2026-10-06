@@ -87,3 +87,23 @@ def test_image_reader_is_bounded(tmp_path):
     raw[root + 10:root + 14] = (2 ** 31).to_bytes(4, "little")              # root dir claims 2 GB
     raw[root + 2:root + 6] = (10 ** 6).to_bytes(4, "little")                # …at a sector past the end
     assert d.read_tag_from_image(io.BytesIO(bytes(raw))) == (None, True)
+
+
+def test_windows_image_comes_from_imapi_with_pycdlib_as_fallback(tmp_path, monkeypatch):
+    from shelf import disc, imapi
+    monkeypatch.setattr(disc.sys, "platform", "win32")
+    tag = DiscTag("steam", "1262350", "SIGNALIS")
+    calls = []
+
+    def fake_imapi(files, label, out):               # what Windows would do: a valid image
+        calls.append(label)
+        disc._build_pycdlib(files, label, out)
+    monkeypatch.setattr(imapi, "build", fake_imapi)
+    out = disc.build_iso(tag, tmp_path / "a.iso")
+    assert calls == ["SIGNALIS"] and read_tag_from_iso(out).disc_id == tag.disc_id
+
+    def broken(files, label, out):
+        raise RuntimeError("IMAPI2FS not registered")
+    monkeypatch.setattr(imapi, "build", broken)
+    out = disc.build_iso(tag, tmp_path / "b.iso")    # falls back, still a good image
+    assert read_tag_from_iso(out).disc_id == tag.disc_id

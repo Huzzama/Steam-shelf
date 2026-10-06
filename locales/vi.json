@@ -203,5 +203,18 @@
  "burn.err_no_access": "Người dùng của bạn không có quyền ghi vào ổ đĩa. Hãy thêm chính bạn vào nhóm của ổ (sudo usermod -aG cdrom $USER; trên Arch là 'optical'), đăng xuất rồi đăng nhập lại, sau đó thử lại.",
  "burn.err_no_disc": "Hãy cho đĩa CD hoặc DVD trắng vào ổ trước.",
  "burn.err_not_blank": "Đĩa này không phải là đĩa trắng. Hãy cho CD-R hoặc DVD-R trắng vào, hoặc một đĩa ghi lại được mà bạn đã xóa.",
- "burn.err_failed": "Ghi đĩa thất bại: {detail}"
+ "burn.err_failed": "Ghi đĩa thất bại: {detail}",
+ "settings.launch_mode": "Steam mở game trong",
+ "settings.launch_desktop": "Steam desktop",
+ "settings.launch_bigpicture": "Chế độ Big Picture",
+ "settings.launch_help": "Big Picture: game hoặc trang cửa hàng của game sẽ mở trong chế độ toàn màn hình dành cho TV của Steam. Nếu Steam đang đóng, nó sẽ khởi động trước, nên mất thêm một chút thời gian.",
+ "action.on_profile": "Hiện trên hồ sơ của tôi",
+ "action.on_profile_tip_on": "Đang có trên hồ sơ pimpmysteam.com của bạn. Nhấp để gỡ.",
+ "action.on_profile_tip_off": "Không có trên hồ sơ pimpmysteam.com của bạn. Nhấp để hiện.",
+ "shelf.profile_on": "Game sẽ hiện trên hồ sơ của bạn sau lần đồng bộ tiếp theo.",
+ "shelf.profile_off": "Đã gỡ khỏi hồ sơ của bạn (vẫn còn trong lịch sử).",
+ "sync.profile_count": "{n} trong số {cap} game mà tài khoản miễn phí hiển thị trên hồ sơ.",
+ "sync.profile_cap": "Bạn đã chọn {n} game cho hồ sơ, nhưng tài khoản miễn phí chỉ hiển thị {cap} game: {cap} game đầu tiên bạn đưa vào đĩa. Hãy ẩn bớt, hoặc ủng hộ trên Ko-fi (pimpmysteam.com/donate) để hiển thị tất cả.",
+ "action.reload_cover": "Tải lại bìa",
+ "cover.reloaded": "Đang tìm lại bìa…"
 }

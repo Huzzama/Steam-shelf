@@ -136,6 +136,24 @@ class Steam(Store):
             return str(v or "0") == self.check(game_id)
         return self.running_app_id() == self.check(game_id)
 
+    def client_running(self) -> bool:
+        """Whether the Steam client itself is open (not a game)."""
+        if sys.platform == "win32":
+            import ctypes
+            import winreg
+            pid = _registry(winreg.HKEY_CURRENT_USER, r"Software\Valve\Steam\ActiveProcess", "pid")
+            if not pid:
+                return False
+            k32 = ctypes.WinDLL("kernel32", use_last_error=True)
+            h = k32.OpenProcess(0x1000, False, int(pid))         # PROCESS_QUERY_LIMITED_INFORMATION
+            if not h:
+                return False
+            code = ctypes.c_ulong()
+            ok = k32.GetExitCodeProcess(h, ctypes.byref(code))
+            k32.CloseHandle(h)
+            return bool(ok) and code.value == 259                # STILL_ACTIVE
+        return _linux_steam_running()
+
     def registry_files(self) -> list[Path]:
         """Linux: Steam keeps its 'registry' in ~/.steam/registry.vdf (inside the sandbox for Flatpak / Snap)."""
         home = Path.home()
@@ -193,6 +211,40 @@ class Steam(Store):
                     best = f
         return best
 
+    def cached_cover(self, app_id: str) -> Optional[Path]:
+        """The portrait Steam keeps in appcache/librarycache (people also drop their own art there).
+        Old layout: librarycache/<appid>_library_600x900.jpg. New layout: librarycache/<appid>/…,
+        either named library_600x900*.jpg or by hash, in which case the 2:3 image is the portrait."""
+        root = self.root()
+        if not root or not STORES["steam"].match(str(app_id)):
+            return None
+        cache = root / "appcache" / "librarycache"
+        cands: list[Path] = []
+        for ext in ("jpg", "png", "webp"):
+            cands += sorted(cache.glob(f"{app_id}_library_600x900*.{ext}"))
+            cands += sorted((cache / str(app_id)).glob(f"library_600x900*.{ext}"))
+        best = next((c for c in cands if c.is_file()), None)
+        if best is not None:
+            return best
+        sub = cache / str(app_id)
+        if not sub.is_dir():
+            return None
+        try:
+            from PIL import Image
+            for f in sorted(sub.iterdir(), key=lambda x: x.stat().st_mtime, reverse=True):
+                if f.suffix.lower() not in (".jpg", ".jpeg", ".png", ".webp"):
+                    continue
+                try:
+                    with Image.open(f) as im:
+                        w, h = im.size
+                except (OSError, ValueError):
+                    continue
+                if w >= 300 and 1.4 <= h / w <= 1.6:
+                    return f
+        except OSError:
+            pass
+        return None
+
     def installed_games(self) -> list[Game]:
         out: dict[str, Game] = {}
         for lib in self.libraries():
@@ -215,6 +267,21 @@ class Steam(Store):
         a = STORES["steam"].match(app_id) and app_id
         base = "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps"
         return [f"{base}/{a}/library_600x900_2x.jpg", f"{base}/{a}/library_600x900.jpg", f"{base}/{a}/header.jpg"] if a else []
+
+
+def _linux_steam_running(proc: Path = Path("/proc")) -> bool:
+    """Linux: any process called 'steam' (native, Flatpak and Snap all show up in the host's /proc)."""
+    try:
+        for d in proc.iterdir():
+            if d.name.isdigit():
+                try:
+                    if (d / "comm").read_text().strip() == "steam":
+                        return True
+                except OSError:
+                    continue
+    except OSError:
+        pass
+    return False
 
 
 # Steam installs these next to games; nobody wants a disc for them

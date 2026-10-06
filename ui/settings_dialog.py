@@ -144,6 +144,16 @@ class SettingsDialog(QDialog):
         row.addWidget(self.missing)
         lay.addLayout(row)
 
+        row = hbox(spacing=SP["md"])
+        row.addWidget(label(t("settings.launch_mode"), "body", wrap=True), 1)
+        self.launch_mode = QComboBox()
+        self.launch_mode.addItem(t("settings.launch_desktop"), "desktop")
+        self.launch_mode.addItem(t("settings.launch_bigpicture"), "bigpicture")
+        self.launch_mode.setCurrentIndex(1 if self.s["launch_mode"] == "bigpicture" else 0)
+        row.addWidget(self.launch_mode)
+        lay.addLayout(row)
+        lay.addWidget(label(t("settings.launch_help"), "muted", wrap=True))
+
         lay.addStretch()
         btns = hbox(spacing=SP["sm"])
         self.btns = btns
@@ -282,7 +292,8 @@ class SettingsDialog(QDialog):
         self.language_changed = lang != self.s["language"]
         self.s.update(enabled=self.enabled.isChecked(), autostart=self.auto.isChecked(),
                       countdown=self.countdown.currentData(), startup_disc=self.startup.currentData(),
-                      not_installed=self.missing.currentData(), language=lang)
+                      not_installed=self.missing.currentData(), launch_mode=self.launch_mode.currentData(),
+                      language=lang)
         settings.save(self.s)
         try:
             autostart.set_enabled(self.s["autostart"])

@@ -203,5 +203,18 @@
  "burn.err_no_access": "Ton compte utilisateur n'a pas le droit d'écrire sur le lecteur. Ajoute-toi à son groupe (sudo usermod -aG cdrom $USER ; sous Arch, 'optical'), ferme ta session, rouvre-la, puis réessaie.",
  "burn.err_no_disc": "Mets d'abord un CD ou un DVD vierge dans le lecteur.",
  "burn.err_not_blank": "Ce disque n'est pas vierge. Mets un CD-R ou un DVD-R vierge, ou un disque réinscriptible que tu as effacé.",
- "burn.err_failed": "La gravure a échoué : {detail}"
+ "burn.err_failed": "La gravure a échoué : {detail}",
+ "settings.launch_mode": "Steam ouvre le jeu dans",
+ "settings.launch_desktop": "Bureau Steam",
+ "settings.launch_bigpicture": "Mode Big Picture",
+ "settings.launch_help": "Big Picture : le jeu, ou sa page de boutique, s'ouvre dans le mode plein écran de Steam pour TV. Si Steam est fermé, il démarre d'abord, ce qui prend un peu plus de temps.",
+ "action.on_profile": "Afficher sur mon profil",
+ "action.on_profile_tip_on": "Sur ton profil pimpmysteam.com. Clique pour le retirer.",
+ "action.on_profile_tip_off": "Pas sur ton profil pimpmysteam.com. Clique pour l'afficher.",
+ "shelf.profile_on": "Il apparaîtra sur ton profil après la prochaine synchronisation.",
+ "shelf.profile_off": "Retiré de ton profil (il reste dans ton historique).",
+ "sync.profile_count": "{n} des {cap} jeux qu'un compte gratuit affiche sur son profil.",
+ "sync.profile_cap": "Tu as choisi {n} jeux pour ton profil, mais un compte gratuit en affiche {cap} : les {cap} premiers que tu as mis sur un disque. Masques-en quelques-uns, ou soutiens le projet sur Ko-fi (pimpmysteam.com/donate) pour tous les afficher.",
+ "action.reload_cover": "Recharger la jaquette",
+ "cover.reloaded": "Nouvelle recherche de la jaquette…"
 }

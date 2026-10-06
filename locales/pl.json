@@ -203,5 +203,18 @@
  "burn.err_no_access": "Twój użytkownik nie ma uprawnień do zapisu na napędzie. Dodaj siebie do jego grupy (sudo usermod -aG cdrom $USER; w Arch to 'optical'), wyloguj się i zaloguj ponownie, a potem spróbuj jeszcze raz.",
  "burn.err_no_disc": "Najpierw włóż do napędu czystą płytę CD lub DVD.",
  "burn.err_not_blank": "Ta płyta nie jest czysta. Włóż czystą płytę CD-R lub DVD-R albo wcześniej wymazaną płytę wielokrotnego zapisu.",
- "burn.err_failed": "Nagrywanie nie powiodło się: {detail}"
+ "burn.err_failed": "Nagrywanie nie powiodło się: {detail}",
+ "settings.launch_mode": "Steam otwiera grę w",
+ "settings.launch_desktop": "Steam na pulpicie",
+ "settings.launch_bigpicture": "Tryb Big Picture",
+ "settings.launch_help": "Big Picture: gra lub jej strona w sklepie otwiera się w pełnoekranowym trybie Steam dla telewizora. Jeśli Steam jest zamknięty, najpierw się uruchomi, co potrwa trochę dłużej.",
+ "action.on_profile": "Pokaż na moim profilu",
+ "action.on_profile_tip_on": "Na Twoim profilu na pimpmysteam.com. Kliknij, aby go zdjąć.",
+ "action.on_profile_tip_off": "Nie ma go na Twoim profilu na pimpmysteam.com. Kliknij, aby go pokazać.",
+ "shelf.profile_on": "Pojawi się na Twoim profilu po następnej synchronizacji.",
+ "shelf.profile_off": "Zdjęta z Twojego profilu (zostaje w historii).",
+ "sync.profile_count": "{n} z {cap} gier, które darmowe konto pokazuje na profilu.",
+ "sync.profile_cap": "Wybrano {n} gier na profil, ale darmowe konto pokazuje {cap}: pierwsze {cap}, które trafiły na płytę. Ukryj kilka albo wesprzyj projekt na Ko-fi (pimpmysteam.com/donate), aby pokazać wszystkie.",
+ "action.reload_cover": "Wczytaj okładkę ponownie",
+ "cover.reloaded": "Ponowne szukanie okładki…"
 }

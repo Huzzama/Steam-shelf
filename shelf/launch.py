@@ -13,6 +13,7 @@ import logging
 import os
 import subprocess
 import sys
+import time
 import webbrowser
 from dataclasses import dataclass
 from pathlib import Path
@@ -89,11 +90,33 @@ def open_uri(uri: str) -> bool:
         return False
 
 
+BIG_PICTURE_URI = "steam://open/bigpicture"
+BP_SETTLE = 3.0          # s for Big Picture to come up when Steam was already open
+BP_START = 45.0          # s to wait for Steam itself to start first
+
+
+def big_picture(st, settle: float = BP_SETTLE, start: float = BP_START) -> None:
+    """Open Steam's Big Picture before the game or the page, so they open in it (TV / couch
+    setups). Steam closed: it starts, then Big Picture comes up; that takes a while."""
+    was_open = st.client_running()
+    if not open_uri(BIG_PICTURE_URI):
+        return
+    if not was_open:
+        end = time.time() + start
+        while time.time() < end and not st.client_running():
+            time.sleep(0.5)
+        settle *= 3
+    time.sleep(settle)
+
+
 def run(tag: DiscTag, prefs: dict | None = None) -> Action:
+    prefs = prefs or settings.load()
     a = plan(tag, prefs)
     log.info("%s -> %s %s", tag.key, a.kind, a.uri)
     if a.kind in ("running", "missing"):
         return a
+    if prefs.get("launch_mode") == "bigpicture" and a.uri.startswith("steam://"):
+        big_picture(store_for("steam"))
     if not open_uri(a.uri) and a.fallback:
         webbrowser.open(a.fallback)
     if a.kind == "play":

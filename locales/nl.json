@@ -203,5 +203,18 @@
  "burn.err_no_access": "Je gebruikersaccount mag niet naar de drive schrijven. Voeg jezelf toe aan de groep ervan (sudo usermod -aG cdrom $USER; bij Arch 'optical'), log uit en weer in en probeer het opnieuw.",
  "burn.err_no_disc": "Plaats eerst een lege cd of dvd in de drive.",
  "burn.err_not_blank": "Die disc is niet leeg. Plaats een lege CD-R of DVD-R, of een herschrijfbare disc die je hebt gewist.",
- "burn.err_failed": "Branden mislukt: {detail}"
+ "burn.err_failed": "Branden mislukt: {detail}",
+ "settings.launch_mode": "Steam opent de game in",
+ "settings.launch_desktop": "Steam-desktop",
+ "settings.launch_bigpicture": "Big Picture-modus",
+ "settings.launch_help": "Big Picture: de game, of de winkelpagina ervan, opent in de volledig scherm tv-modus van Steam. Als Steam gesloten is, start het eerst op, wat iets langer duurt.",
+ "action.on_profile": "Tonen op mijn profiel",
+ "action.on_profile_tip_on": "Op je pimpmysteam.com-profiel. Klik om het te verwijderen.",
+ "action.on_profile_tip_off": "Niet op je pimpmysteam.com-profiel. Klik om het te tonen.",
+ "shelf.profile_on": "Het verschijnt op je profiel na de volgende synchronisatie.",
+ "shelf.profile_off": "Van je profiel gehaald (het blijft in je geschiedenis).",
+ "sync.profile_count": "{n} van de {cap} games die een gratis account op zijn profiel toont.",
+ "sync.profile_cap": "Je koos {n} games voor je profiel, maar een gratis account toont er {cap}: de eerste {cap} die je op een disc zette. Verberg er een paar, of steun het project op Ko-fi (pimpmysteam.com/donate) om ze allemaal te tonen.",
+ "action.reload_cover": "Cover opnieuw laden",
+ "cover.reloaded": "Cover wordt opnieuw gezocht…"
 }

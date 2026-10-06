@@ -12,11 +12,13 @@ DEFAULTS = {
     "countdown": 5,               # s of "starting in…" card before launching; 0 = launch at once
     "startup_disc": "ask",        # disc already in the drive at startup / wake: "ask" | "ignore"
     "not_installed": "store",     # game not installed: "store" (store page) | "install" (Steam install dialog)
+    "launch_mode": "desktop",     # where Steam opens the game / the page: "desktop" | "bigpicture"
     "autostart": True,            # start the agent when you log in (Windows, Linux)
     "language": "auto",           # "auto" = the system's, or a code from shelf.i18n.LANGUAGES
 }
 
-CHOICES = {"startup_disc": ("ask", "ignore"), "not_installed": ("store", "install")}
+CHOICES = {"startup_disc": ("ask", "ignore"), "not_installed": ("store", "install"),
+           "launch_mode": ("desktop", "bigpicture")}
 
 
 def _path() -> Path:

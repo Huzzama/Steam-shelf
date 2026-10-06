@@ -203,5 +203,18 @@
  "burn.err_no_access": "사용자 계정에 드라이브 쓰기 권한이 없습니다. 사용자 계정을 드라이브의 그룹에 추가하고 (sudo usermod -aG cdrom $USER; Arch에서는 'optical') 로그아웃했다가 다시 로그인한 뒤 다시 시도하세요.",
  "burn.err_no_disc": "먼저 빈 CD 또는 DVD를 드라이브에 넣으세요.",
  "burn.err_not_blank": "이 디스크는 비어 있지 않습니다. 빈 CD-R 또는 DVD-R, 아니면 지워 둔 재기록 가능한 디스크를 넣으세요.",
- "burn.err_failed": "굽기에 실패했습니다: {detail}"
+ "burn.err_failed": "굽기에 실패했습니다: {detail}",
+ "settings.launch_mode": "Steam에서 게임을 여는 방식",
+ "settings.launch_desktop": "Steam 데스크톱",
+ "settings.launch_bigpicture": "Big Picture 모드",
+ "settings.launch_help": "Big Picture: 게임 또는 상점 페이지가 Steam의 전체 화면 TV 모드로 열려요. Steam이 꺼져 있으면 먼저 실행되어 시간이 조금 더 걸려요.",
+ "action.on_profile": "내 프로필에 표시",
+ "action.on_profile_tip_on": "pimpmysteam.com 프로필에 표시 중이에요. 클릭하면 내려요.",
+ "action.on_profile_tip_off": "pimpmysteam.com 프로필에 표시되지 않아요. 클릭하면 표시해요.",
+ "shelf.profile_on": "다음 동기화 후 프로필에 표시돼요.",
+ "shelf.profile_off": "프로필에서 내렸어요(기록에는 남아 있어요).",
+ "sync.profile_count": "무료 계정이 프로필에 보여 주는 {cap}개 중 {n}개예요.",
+ "sync.profile_cap": "프로필용으로 게임 {n}개를 골랐지만 무료 계정은 {cap}개만 보여 줘요. 디스크에 넣은 순서대로 처음 {cap}개예요. 일부를 숨기거나 Ko-fi(pimpmysteam.com/donate)에서 프로젝트를 후원하면 모두 표시할 수 있어요.",
+ "action.reload_cover": "커버 다시 불러오기",
+ "cover.reloaded": "커버를 다시 찾는 중…"
 }

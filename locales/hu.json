@@ -203,5 +203,18 @@
  "burn.err_no_access": "A felhasználódnak nincs írási joga a meghajtóhoz. Add hozzá magad a csoportjához (sudo usermod -aG cdrom $USER; Arch esetén 'optical'), jelentkezz ki, majd jelentkezz be újra, és próbáld meg még egyszer.",
  "burn.err_no_disc": "Előbb tegyél egy üres CD-t vagy DVD-t a meghajtóba.",
  "burn.err_not_blank": "Ez a lemez nem üres. Tegyél be üres CD-R-t vagy DVD-R-t, vagy egy korábban törölt újraírható lemezt.",
- "burn.err_failed": "Az égetés nem sikerült: {detail}"
+ "burn.err_failed": "Az égetés nem sikerült: {detail}",
+ "settings.launch_mode": "A Steam a játékot itt nyitja meg:",
+ "settings.launch_desktop": "Steam asztali",
+ "settings.launch_bigpicture": "Big Picture mód",
+ "settings.launch_help": "Big Picture: a játék vagy az áruházi oldala a Steam teljes képernyős tévés módjában nyílik meg. Ha a Steam be van zárva, először elindul, ami egy kicsit tovább tart.",
+ "action.on_profile": "Megjelenítés a profilomon",
+ "action.on_profile_tip_on": "Rajta van a pimpmysteam.com profilodon. Kattints, ha le akarod venni.",
+ "action.on_profile_tip_off": "Nincs rajta a pimpmysteam.com profilodon. Kattints, ha meg akarod jeleníteni.",
+ "shelf.profile_on": "A következő szinkronizálás után megjelenik a profilodon.",
+ "shelf.profile_off": "Levéve a profilodról (az előzményeidben megmarad).",
+ "sync.profile_count": "{n} a(z) {cap} játékból, amit egy ingyenes fiók megjelenít a profilján.",
+ "sync.profile_cap": "{n} játékot választottál a profilodra, de egy ingyenes fiók {cap} játékot jelenít meg: az első {cap}-t, amit lemezre tettél. Rejts el párat, vagy támogass a Ko-fin (pimpmysteam.com/donate), hogy mind látszódjon.",
+ "action.reload_cover": "Borító újratöltése",
+ "cover.reloaded": "A borító keresése újra…"
 }

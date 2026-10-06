@@ -15,7 +15,9 @@ from __future__ import annotations
 
 import io
 import json
+import logging
 import re
+import sys
 import uuid
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
@@ -133,43 +135,65 @@ def _autorun(title: str, has_icon: bool) -> bytes:
     return ("\r\n".join(lines) + "\r\n").encode("utf-8-sig")
 
 
+def disc_files(tag: DiscTag, cover_jpg: Optional[bytes] = None, icon_ico: Optional[bytes] = None) -> dict[str, bytes]:
+    """Everything that goes on the disc, by path ('STEAMSHELF/DISC.JSON' …)."""
+    files = {f"{TAG_DIR}/{TAG_FILE}": tag.to_json().encode("utf-8")}
+    if cover_jpg:
+        files[f"{TAG_DIR}/COVER.JPG"] = cover_jpg
+    if icon_ico:
+        files[f"{TAG_DIR}/ICON.ICO"] = icon_ico
+    files["AUTORUN.INF"] = _autorun(tag.title, bool(icon_ico))
+    files["README.TXT"] = (f"{clean_title(tag.title)}\r\n\r\nThis disc was made with Steam Shelf (pimpmysteam.com).\r\n"
+                          f"Put it in a PC running Steam Shelf and the game starts.\r\n").encode("utf-8")
+    # Windows' virtual DVD refuses tiny volumes: a hidden 2 MB filler makes the volume
+    # itself that big (padding only the file was not enough; the descriptor must say so)
+    files[f"{TAG_DIR}/PAD.BIN"] = b"\0" * MIN_IMAGE
+    return files
+
+
 def build_iso(tag: DiscTag, out: Path, cover_jpg: Optional[bytes] = None, icon_ico: Optional[bytes] = None) -> Path:
-    """Write the disc image (ISO 9660 + Joliet), padded to a size Windows mounts happily. Fits any CD-R."""
+    """Write the disc image (ISO 9660 + Joliet). On Windows the image is made by Windows itself
+    (IMAPI2, what Explorer's "Burn to disc" uses), so Windows Disc Image Burner and the virtual
+    DVD drive accept it; elsewhere, or if that fails, pycdlib writes it. Fits any CD-R."""
+    files = disc_files(tag, cover_jpg, icon_ico)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    tmp = out.with_suffix(".tmp")
+    if sys.platform == "win32":
+        try:
+            from shelf import imapi
+            imapi.build(files, volume_label(tag.title), tmp)
+            if read_tag_from_iso(tmp) is None:
+                kept = out.with_suffix(".imapi.iso")           # kept for a look at what Windows wrote
+                tmp.replace(kept)
+                raise RuntimeError(f"the image Windows made cannot be read back (kept as {kept.name})")
+            tmp.replace(out)
+            return out
+        except Exception as e:      # noqa: BLE001 — fall back to our own writer
+            logging.getLogger("shelf.disc").warning("IMAPI could not make the image (%s): using pycdlib", e)
+    _build_pycdlib(files, volume_label(tag.title), tmp)
+    _pad(tmp)
+    tmp.replace(out)
+    return out
+
+
+def _build_pycdlib(files: dict[str, bytes], label: str, out: Path) -> None:
     import pycdlib
 
     iso = pycdlib.PyCdlib()
-    iso.new(interchange_level=3, joliet=3, vol_ident=volume_label(tag.title),
-            app_ident_str="STEAM SHELF", preparer_ident_str="PIMPMYSTEAM.COM")
-
-    def add(data: bytes, iso_path: str, joliet_path: str):
-        iso.add_fp(io.BytesIO(data), len(data), iso_path, joliet_path=joliet_path)
-
-    iso.add_directory(f"/{TAG_DIR}", joliet_path=f"/{TAG_DIR}")
-    add(tag.to_json().encode("utf-8"), f"/{TAG_DIR}/{TAG_FILE};1", f"/{TAG_DIR}/{TAG_FILE}")
-    if cover_jpg:
-        add(cover_jpg, f"/{TAG_DIR}/COVER.JPG;1", f"/{TAG_DIR}/COVER.JPG")
-    if icon_ico:
-        add(icon_ico, f"/{TAG_DIR}/ICON.ICO;1", f"/{TAG_DIR}/ICON.ICO")
-    add(_autorun(tag.title, bool(icon_ico)), "/AUTORUN.INF;1", "/AUTORUN.INF")
-    readme = (f"{clean_title(tag.title)}\r\n\r\nThis disc was made with Steam Shelf (pimpmysteam.com).\r\n"
-              f"Put it in a PC running Steam Shelf and the game starts.\r\n")
-    add(readme.encode("utf-8"), "/README.TXT;1", "/README.TXT")
-    # Windows' virtual DVD refuses tiny volumes: a hidden 2 MB filler makes the volume
-    # itself that big (padding only the file was not enough; the descriptor must say so)
-    add(b"\0" * MIN_IMAGE, f"/{TAG_DIR}/PAD.BIN;1", f"/{TAG_DIR}/PAD.BIN")
+    iso.new(interchange_level=3, joliet=3, vol_ident=label, app_ident_str="STEAM SHELF",
+            preparer_ident_str="PIMPMYSTEAM.COM")
+    dirs = sorted({p.rsplit("/", 1)[0] for p in files if "/" in p})
+    for d in dirs:
+        iso.add_directory(f"/{d}", joliet_path=f"/{d}")
+    for path, data in files.items():
+        iso.add_fp(io.BytesIO(data), len(data), f"/{path};1", joliet_path=f"/{path}")
     try:
         iso.set_hidden(iso_path=f"/{TAG_DIR}/PAD.BIN;1")
         iso.set_hidden(joliet_path=f"/{TAG_DIR}/PAD.BIN")
     except Exception:          # noqa: BLE001 — hiding is cosmetic
         pass
-
-    out.parent.mkdir(parents=True, exist_ok=True)
-    tmp = out.with_suffix(".tmp")
-    iso.write(str(tmp))
+    iso.write(str(out))
     iso.close()
-    _pad(tmp)
-    tmp.replace(out)
-    return out
 
 
 MIN_IMAGE = 2 * 1024 * 1024        # size of the hidden filler inside the volume

@@ -5,13 +5,17 @@ or removing it from the shelf does not take the game out: you had it on a disc.
 This is what the "Steam Shelf" section of a pimpmysteam.com profile will show
 (the sync comes later; 'synced' marks what the server already has).
 
-DATA_DIR/history.json: [{store, game_id, title, first_disc, synced}]
+DATA_DIR/history.json: [{store, game_id, title, first_disc, synced, shared, hidden}]
+
+'hidden' takes a game off the profile without forgetting it: free accounts show
+100 games there (supporters on Ko-fi: all of them), so you choose which.
 """
 from __future__ import annotations
 
 import json
 import os
 from datetime import datetime, timezone
+from typing import Optional
 
 import config
 
@@ -34,8 +38,36 @@ def load() -> list[dict]:
         return []
 
 
+def _save(items: list[dict]) -> None:
+    tmp = _FILE.with_suffix(".tmp")
+    tmp.write_text(json.dumps(items, indent=2, ensure_ascii=False), encoding="utf-8")
+    os.replace(tmp, _FILE)
+
+
 def keys() -> set[tuple[str, str]]:
     return {(x["store"], str(x["game_id"])) for x in load()}
+
+
+def entry(store: str, game_id: str) -> Optional[dict]:
+    return next((x for x in load() if (x["store"], str(x["game_id"])) == (store, str(game_id))), None)
+
+
+def on_profile(store: str, game_id: str) -> Optional[bool]:
+    """True/False for a game in the history, None for one that never reached a disc."""
+    e = entry(store, game_id)
+    return None if e is None else not e.get("hidden")
+
+
+def set_on_profile(store: str, game_id: str, on: bool) -> bool:
+    """Show or hide a game on the profile; the next sync tells the server. False if not in the history."""
+    items = load()
+    for x in items:
+        if (x["store"], str(x["game_id"])) == (store, str(game_id)):
+            if bool(x.get("hidden")) != (not on):
+                x["hidden"], x["synced"] = not on, False
+                _save(items)
+            return True
+    return False
 
 
 def record(store: str, game_id: str, title: str) -> bool:
@@ -46,8 +78,7 @@ def record(store: str, game_id: str, title: str) -> bool:
         return False
     items.append({"store": store, "game_id": str(game_id), "title": title,
                   "first_disc": datetime.now(timezone.utc).isoformat(timespec="seconds"), "synced": False,
-                  "shared": bool(shared)})      # from your Steam Family (the profile can say so)
-    tmp = _FILE.with_suffix(".tmp")
-    tmp.write_text(json.dumps(items, indent=2, ensure_ascii=False), encoding="utf-8")
-    os.replace(tmp, _FILE)
+                  "shared": bool(shared),       # from your Steam Family (the profile can say so)
+                  "hidden": False})
+    _save(items)
     return True

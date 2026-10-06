@@ -203,5 +203,18 @@
  "burn.err_no_access": "你的用户没有向光驱写入的权限。请将你自己加入它的用户组(sudo usermod -aG cdrom $USER;在 Arch 上为 'optical'),注销并重新登录后再试。",
  "burn.err_no_disc": "请先在光驱中放入空白的 CD 或 DVD。",
  "burn.err_not_blank": "这张光盘不是空白的。请放入空白的 CD-R 或 DVD-R,或者你已擦除的可重写光盘。",
- "burn.err_failed": "刻录失败:{detail}"
+ "burn.err_failed": "刻录失败:{detail}",
+ "settings.launch_mode": "Steam 打开游戏的方式",
+ "settings.launch_desktop": "Steam 桌面",
+ "settings.launch_bigpicture": "Big Picture 模式",
+ "settings.launch_help": "Big Picture:游戏或其商店页面会在 Steam 的全屏电视模式中打开。如果 Steam 未运行,会先启动它,耗时稍长。",
+ "action.on_profile": "显示在我的个人资料",
+ "action.on_profile_tip_on": "已显示在你的 pimpmysteam.com 个人资料中。点击可移除。",
+ "action.on_profile_tip_off": "未显示在你的 pimpmysteam.com 个人资料中。点击可显示。",
+ "shelf.profile_on": "下次同步后,它会显示在你的个人资料中。",
+ "shelf.profile_off": "已从你的个人资料中移除(仍保留在你的历史记录中)。",
+ "sync.profile_count": "免费账号可在个人资料中显示 {cap} 款游戏,你已选 {n} 款。",
+ "sync.profile_cap": "你为个人资料选了 {n} 款游戏,但免费账号只显示 {cap} 款:即你最先放进光盘的 {cap} 款。可以隐藏一些,或在 Ko-fi(pimpmysteam.com/donate)上支持本项目,以显示全部。",
+ "action.reload_cover": "重新加载封面",
+ "cover.reloaded": "正在重新查找封面…"
 }

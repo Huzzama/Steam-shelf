@@ -203,5 +203,18 @@
  "burn.err_no_access": "У твоего пользователя нет прав на запись в привод. Добавь себя в его группу (sudo usermod -aG cdrom $USER; в Arch это 'optical'), выйди из системы, войди снова и попробуй ещё раз.",
  "burn.err_no_disc": "Сначала вставь чистый CD или DVD в привод.",
  "burn.err_not_blank": "Этот диск не чистый. Вставь чистый CD-R или DVD-R либо перезаписываемый диск, который ты стёр.",
- "burn.err_failed": "Не удалось записать диск: {detail}"
+ "burn.err_failed": "Не удалось записать диск: {detail}",
+ "settings.launch_mode": "Steam открывает игру в",
+ "settings.launch_desktop": "Рабочий стол Steam",
+ "settings.launch_bigpicture": "Режим Big Picture",
+ "settings.launch_help": "Big Picture: игра или её страница в магазине откроется в полноэкранном режиме Steam для телевизора. Если Steam закрыт, он сначала запустится, и это займёт чуть больше времени.",
+ "action.on_profile": "Показывать в моём профиле",
+ "action.on_profile_tip_on": "В твоём профиле на pimpmysteam.com. Нажми, чтобы убрать.",
+ "action.on_profile_tip_off": "Не в твоём профиле на pimpmysteam.com. Нажми, чтобы показать.",
+ "shelf.profile_on": "Она появится в твоём профиле после следующей синхронизации.",
+ "shelf.profile_off": "Убрано из твоего профиля (остаётся в истории).",
+ "sync.profile_count": "{n} из {cap} игр, которые бесплатный аккаунт показывает в профиле.",
+ "sync.profile_cap": "Ты выбрал(а) для профиля игр: {n}, но бесплатный аккаунт показывает {cap}: первые {cap}, которые ты записал(а) на диск. Скрой часть игр или поддержи проект на Ko-fi (pimpmysteam.com/donate), чтобы показывать все.",
+ "action.reload_cover": "Обновить обложку",
+ "cover.reloaded": "Ищем обложку заново…"
 }

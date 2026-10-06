@@ -334,7 +334,7 @@ def test_burn_checks_the_disc_first(fake_xorriso, tmp_path):
     calls, toc = fake_xorriso
     iso = tmp_path / "x.iso"
     assert media.burn(iso, "/dev/sr0") == "burned"
-    assert calls == [["/usr/bin/xorriso", "-as", "cdrecord", "-v", "dev=/dev/sr0", str(iso)]]
+    assert calls == [["/usr/bin/xorriso", "-as", "cdrecord", "-v", "-eject", "dev=/dev/sr0", str(iso)]]
     for disc, code in [(("CD-R", "is written , is closed"), "not_blank"),
                        (("is not present", "is not present"), "no_disc")]:
         toc["text"] = TOC % disc

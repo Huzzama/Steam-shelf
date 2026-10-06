@@ -1,8 +1,22 @@
+# Python
 __pycache__/
 *.pyc
+.pytest_cache/
+
+# virtual environments
 .venv/
 venv/
+
+# builds (python tools/build.py)
 build/
 dist/
 *.spec.bak
-.pytest_cache/
+tools/appimagetool-x86_64.AppImage
+
+# local data and scratch
+*.iso
+*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

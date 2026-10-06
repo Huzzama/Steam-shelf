@@ -203,5 +203,18 @@
  "burn.err_no_access": "Dein Benutzerkonto hat keine Schreibrechte für das Laufwerk. Füge dich der zugehörigen Gruppe hinzu (sudo usermod -aG cdrom $USER; unter Arch 'optical'), melde dich ab und wieder an und versuch es noch einmal.",
  "burn.err_no_disc": "Leg zuerst eine leere CD oder DVD ins Laufwerk.",
  "burn.err_not_blank": "Diese Disc ist nicht leer. Leg eine leere CD-R oder DVD-R ein oder eine wiederbeschreibbare Disc, die du gelöscht hast.",
- "burn.err_failed": "Brennen fehlgeschlagen: {detail}"
+ "burn.err_failed": "Brennen fehlgeschlagen: {detail}",
+ "settings.launch_mode": "Steam öffnet das Spiel in",
+ "settings.launch_desktop": "Steam-Desktop",
+ "settings.launch_bigpicture": "Big Picture-Modus",
+ "settings.launch_help": "Big Picture: Das Spiel oder seine Store-Seite öffnet sich in Steams Vollbildmodus für den Fernseher. Ist Steam geschlossen, startet es zuerst, das dauert etwas länger.",
+ "action.on_profile": "In meinem Profil zeigen",
+ "action.on_profile_tip_on": "In deinem Profil auf pimpmysteam.com. Klick, um es zu entfernen.",
+ "action.on_profile_tip_off": "Nicht in deinem Profil auf pimpmysteam.com. Klick, um es anzuzeigen.",
+ "shelf.profile_on": "Nach der nächsten Synchronisierung erscheint es in deinem Profil.",
+ "shelf.profile_off": "Aus deinem Profil entfernt (bleibt in deinem Verlauf).",
+ "sync.profile_count": "{n} von den {cap} Spielen, die ein kostenloses Konto in seinem Profil zeigt.",
+ "sync.profile_cap": "Du hast {n} Spiele für dein Profil gewählt, aber ein kostenloses Konto zeigt {cap}: die ersten {cap}, die du auf eine Disc gelegt hast. Blende einige aus oder unterstütze das Projekt auf Ko-fi (pimpmysteam.com/donate), um alle zu zeigen.",
+ "action.reload_cover": "Cover neu laden",
+ "cover.reloaded": "Cover wird neu gesucht…"
 }
